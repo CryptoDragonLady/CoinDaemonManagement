@@ -1,6 +1,6 @@
 #!/bin/bash
 
-UPDATE_NAME='Aegeus-1.2.0.0-Linux-64-bit'
+UPDATE_NAME='Aegeus-2.0.0.0-Linux-64-bit'
 TMP_FOLDER='/tmp/aegeus-install/'
 CONFIG_FILE='aegeus.conf'
 CONFIGFOLDER=$(eval echo $HOME/.aegeus)
