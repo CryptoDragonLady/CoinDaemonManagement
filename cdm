@@ -1,6 +1,6 @@
 #!/bin/bash
 
-UPDATE_NAME='Aegeus-2.0.0.0-Linux-64-bit'
+UPDATE_NAME='Aegeus-2.0.2.0-Linux-64-bit'
 TMP_FOLDER='/tmp/aegeus-install/'
 CONFIG_FILE='aegeus.conf'
 CONFIGFOLDER=$(eval echo $HOME/.aegeus)
@@ -10,7 +10,7 @@ COIN_PATH='/usr/local/bin/'
 COIN_GIT='https://github.com/AegeusCoin/aegeus.git'
 COIN_BACKUP='~/AegeusBackup'
 COIN_TGZ=''
-COIN_BOOTSTRAP='https://github.com/AegeusCoin/bootstrap/raw/master/bootstrap.dat.gz'
+COIN_BOOTSTRAP='https://gateway.ipfs.io/ipfs/QmajB3M2pSDNQdvmDsBV272MKcqn918g9YbcjqvwxrqFdD'
 COIN_BOOTSTRAP_ZIP=$(echo $COIN_BOOTSTRAP | awk -F'/' '{print $NF}')
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 COIN_NAME='Aegeus'
@@ -381,18 +381,12 @@ function bootstrap() {
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${RED}Bootstrapping Blockchain"
  echo -e "${BLUE}================================================================================================================================${NC}"
-  mkdir $TMP_FOLDER
   systemctl stop Aegeus.service
   cd $CONFIGFOLDER
   rm -rf blocks chainstate sporks banlist.dat peers.dat 2>/dev/null
-  cd $TMP_FOLDER
   echo -e "${CYAN}Downloading Bootstrap...${NC}"
-  wget -q $COIN_BOOTSTRAP
-  gunzip $COIN_BOOTSTRAP_ZIP >/dev/null 2>&1
-  cp bootstrap.dat  $CONFIGFOLDER >/dev/null 2>&1
-  rm -rf $TMP_FOLDER >/dev/null 2>&1
-  cd $CONFIGFOLDER
-  rm -rf blocks chainstate 2>/dev/null
+  wget -q $COIN_BOOTSTRAP -O bootstrap.tar.gz
+  gunzip bootstrap.tar.gz >/dev/null 2>&1
   cd ~
   systemctl start Aegeus.service
 }
