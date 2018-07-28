@@ -386,7 +386,7 @@ function bootstrap() {
   rm -rf blocks chainstate sporks banlist.dat peers.dat 2>/dev/null
   echo -e "${CYAN}Downloading Bootstrap...${NC}"
   wget -q $COIN_BOOTSTRAP -O bootstrap.tar.gz
-  gunzip bootstrap.tar.gz >/dev/null 2>&1
+  tar -zxvf bootstrap.tar.gz >/dev/null 2>&1
   cd ~
   systemctl start Aegeus.service
 }
